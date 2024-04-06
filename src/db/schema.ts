@@ -8,6 +8,7 @@ import {
   varchar,
 } from "drizzle-orm/pg-core";
 
+
 export const user = pgTable("User", {
   id: uuid("user_id").defaultRandom().primaryKey(),
   name: varchar("name", { length: 150 }).notNull(),
@@ -15,7 +16,7 @@ export const user = pgTable("User", {
   password: varchar("password", { length: 6 }).notNull(),
   image: varchar("image"),
   role: varchar("role", { length: 5, enum: ["user", "admin"] }).default("user"),
-  createdAt: timestamp("createdAt").defaultNow(),
+  createdAt: timestamp("createdAt", { withTimezone: true }).defaultNow(),
 });
 
 export const course = pgTable("Course", {
@@ -28,21 +29,35 @@ export const course = pgTable("Course", {
   popularity: integer("popularity").notNull(),
   createdBy: uuid("createdBy")
     .notNull()
-    .references(() => user.id),
-  createdAt: timestamp("createdAt").defaultNow(),
+    .references(() => user.id,{onDelete:"set null"}),
+  createdAt: timestamp("createdAt", { withTimezone: true }).defaultNow(),
 });
 
 export const enrollments = pgTable("Enrollments", {
   id: serial("enroll_id").primaryKey(),
   user_id: uuid("user_id")
     .notNull()
-    .references(() => user.id),
+    .references(() => user.id,{onDelete:"cascade"}),
   course_id: integer("course_id ")
     .notNull()
-    .references(() => course.id),
-  enrollment_date: timestamp("createdAt").defaultNow(),
+    .references(() => course.id,{onDelete:"cascade"}),
+  enrollment_date: timestamp("createdAt", { withTimezone: true }).defaultNow(),
 });
 
-// export const courseRelation = relations(course, ({ one }) => ({
-//   createdBy: one(user, { fields: [course.createdBy], references: [user.id] }),
-// }));
+export const userRelation = relations(user, ({ many }) => ({
+  enrollments: many(enrollments),
+  course: many(course),
+}));
+
+export const courseRelation = relations(course, ({ one, many }) => ({
+  createdBy: one(user, { fields: [course.createdBy], references: [user.id] }),
+  enrollments: many(enrollments),
+}));
+
+export const enrollmentsRelation = relations(enrollments, ({ one }) => ({
+  user: one(user, { fields: [enrollments.user_id], references: [user.id] }),
+  course: one(course, {
+    fields: [enrollments.course_id],
+    references: [course.id],
+  }),
+}));
