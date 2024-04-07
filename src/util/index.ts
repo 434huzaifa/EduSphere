@@ -1,4 +1,4 @@
-import { Response } from "express-serve-static-core";
+import { Response } from "express";
 import { fromZodError } from "zod-validation-error";
 import { ZodError } from "zod";
 

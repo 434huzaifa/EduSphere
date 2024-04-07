@@ -13,8 +13,8 @@ import {
 export async function updateUser(
   req: Request<
     {},
-    z.infer<typeof updateUserSchema>,
     {},
+    z.infer<typeof updateUserSchema>,
     z.infer<typeof userGetQuery>
   >,
   res: Response
@@ -22,6 +22,7 @@ export async function updateUser(
   try {
     userGetQuery.parse(req.query);
     updateUserSchema.parse(req.body);
+    
     let result = [];
     try {
       result = await db
@@ -121,4 +122,3 @@ export async function insertUser(
     ZodErrorHandelr(res, error);
   }
 }
-

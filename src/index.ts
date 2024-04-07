@@ -6,6 +6,9 @@ import swaggerUi, { SwaggerUiOptions } from "swagger-ui-express";
 import { generator } from "./documentation";
 import courseRouter from "./router/course";
 import enrollRouter from "./router/enroll"
+import jwtRouter from "./router/jwt"
+import cookieParser from "cookie-parser";
+import cors from "cors"
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -22,9 +25,12 @@ app.use(
     ].join(" - ");
   })
 );
+app.use(cookieParser())
+app.use(cors())
 app.use("/user", userRouter);
 app.use("/course", courseRouter);
 app.use("/enroll", enrollRouter);
+app.use('/',jwtRouter)
 const options:SwaggerUiOptions={
   customSiteTitle:"EduSphere",
 }
