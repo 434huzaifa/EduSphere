@@ -187,39 +187,4 @@ export const courseDocument: RouteConfig[] = [
       },
     },
   },
-  {
-    method: "get",
-    path: "/course/enroll/",
-    tags: ["Course"],
-    summary: "Get all the course of user enroll",
-    request: {
-      query: userGetQuery,
-    },
-    responses: {
-      200: {
-        description: "",
-        content: {
-          "application/json": {
-            schema: selectSchemaCourse.array().openapi("Course"),
-          },
-        },
-      },
-      400: {
-        description: "Bad Request",
-        content: {
-          "application/json": {
-            schema: msgSchema.openapi("Error"),
-          },
-        },
-      },
-      500: {
-        description: "Bad Request",
-        content: {
-          "application/json": {
-            schema: msgSchema.openapi("Error"),
-          },
-        },
-      },
-    },
-  },
 ];

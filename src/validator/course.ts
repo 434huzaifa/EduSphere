@@ -16,8 +16,6 @@ export const insertSchemaCourse = createInsertSchema(course, {
         });
         return !!t_user;
       } catch (error) {
-        
-        console.error("Error validating createdBy ID:", error);
         return false;
       }
     },{message:"Created By is not a valid user"}),
@@ -38,6 +36,7 @@ export const updateCourseSchema = createInsertSchema(course, {
 });
 
 export const selectSchemaCourse = createSelectSchema(course);
+
 export const courseGetQuery = z.object({
   user: z.string().uuid({ message: "Invalid UUID or EMAIL" }),
   id: z.string().refine(val=>!isNaN(parseInt(val)),{message:"Id is not a number"}),

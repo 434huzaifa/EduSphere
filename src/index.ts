@@ -2,9 +2,10 @@ import express from "express";
 import userRouter from "./router/user";
 import logger from "morgan";
 import dayjs from "dayjs";
-import swaggerUi, { SwaggerOptions, SwaggerUiOptions } from "swagger-ui-express";
+import swaggerUi, { SwaggerUiOptions } from "swagger-ui-express";
 import { generator } from "./documentation";
 import courseRouter from "./router/course";
+import enrollRouter from "./router/enroll"
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -23,6 +24,7 @@ app.use(
 );
 app.use("/user", userRouter);
 app.use("/course", courseRouter);
+app.use("/enroll", courseRouter);
 const options:SwaggerUiOptions={
   customSiteTitle:"EduSphere",
 }

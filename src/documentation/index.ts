@@ -9,6 +9,7 @@ import { insertSchemaUser, selectSchemaUser } from "../validator/user";
 import { insertSchemaCourse, selectSchemaCourse } from "../validator/course";
 import { insertSchemaEnroll, selectSchemaEnroll } from "../validator/enroll";
 import { courseDocument } from "./course";
+import { enrollDocumentation } from "./enroll";
 export const registry = new OpenAPIRegistry();
 userDocument.map(x=>{
     registry.registerPath(x)
@@ -16,7 +17,9 @@ userDocument.map(x=>{
 courseDocument.map(x=>{
   registry.registerPath(x)
 })
-
+enrollDocumentation.map(x=>{
+  registry.registerPath(x)
+})
 postRequestDoc(
     selectSchemaUser,
     insertSchemaUser,

@@ -125,64 +125,33 @@ export async function updateCourse(
   }
 }
 
-export async function getAllCoruseOfUser(
+export async function getAllCourseofUser(
   req: Request<{}, {}, {}, z.infer<typeof userGetQuery>>,
   res: Response
 ) {
-  userGetQuery.parse(req.query);
-  let result= [];
   try {
-    result = await db.query.course.findMany({
-      where: eq(course.createdBy, req.query.user),
-    });
-    console.log("~ result", result)
-    res.status(200).send(result);
-  } catch (error) {
-    const t_user = await db.query.user.findFirst({
-      where: eq(user.email, req.query.user),
-    });
-    if (t_user) {
-      result = await db.query.course.findMany({
-        where: eq(course.createdBy, t_user.id),
-      });
-      res.status(200).send(result);
-    } else {
-      res.status(404).send({ msg: "User not found" });
-    }
-  }
-}
-
-export async function getAllEnrollCourse(
-    req: Request<{}, {}, {}, z.infer<typeof userGetQuery>>,
-    res: Response
-  ) {
     userGetQuery.parse(req.query);
-    let result= [];
+    let result = [];
     try {
-      result = await db.query.enrollments.findMany({
-        columns:{course_id:true},
-        where:eq(enrollments.user_id,req.query.user),
-        with:{
-            course:true
-        }
-      })
+      result = await db.query.course.findMany({
+        where: eq(course.createdBy, req.query.user),
+      });
       res.status(200).send(result);
     } catch (error) {
       const t_user = await db.query.user.findFirst({
         where: eq(user.email, req.query.user),
       });
       if (t_user) {
-        result = await db.query.enrollments.findMany({
-            columns:{course_id:true},
-            where:eq(enrollments.user_id,req.query.user),
-            with:{
-                course:true
-            }
-          })
+        result = await db.query.course.findMany({
+          where: eq(course.createdBy, t_user.id),
+        });
         res.status(200).send(result);
       } else {
         res.status(404).send({ msg: "User not found" });
       }
     }
+  } catch (error) {
+    ZodErrorHandelr(res, error);
   }
-  
+}
+

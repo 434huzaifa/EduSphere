@@ -1,9 +1,8 @@
-import e, { Router } from "express";
+import { Router } from "express";
 import {
   deleteCourse,
-  getAllCoruseOfUser,
   getAllCourse,
-  getAllEnrollCourse,
+  getAllCourseofUser,
   getCourse,
   insertCourse,
   updateCourse,
@@ -15,6 +14,5 @@ router.get("/", getCourse);
 router.get("/allcourse/", getAllCourse);
 router.delete("/", deleteCourse);
 router.patch("/", updateCourse);
-router.patch("/created/", getAllCoruseOfUser);
-router.patch("/enroll/", getAllEnrollCourse);
+router.get("/created/", getAllCourseofUser);
 export default router;
