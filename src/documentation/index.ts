@@ -2,21 +2,20 @@ import {
   OpenAPIRegistry,
   OpenApiGeneratorV3,
 } from "@asteasolutions/zod-to-openapi";
-import {
-  insertSchemaCourse,
-  insertSchemaEnroll,
-  insertSchemaUser,
-  selectSchemaCourse,
-  selectSchemaEnroll,
-  selectSchemaUser,
-} from "../validator";
+
 import { postRequestDoc } from "./helpter";
 import { userDocument } from "./user";
+import { insertSchemaUser, selectSchemaUser } from "../validator/user";
+import { insertSchemaCourse, selectSchemaCourse } from "../validator/course";
+import { insertSchemaEnroll, selectSchemaEnroll } from "../validator/enroll";
+import { courseDocument } from "./course";
 export const registry = new OpenAPIRegistry();
 userDocument.map(x=>{
     registry.registerPath(x)
 })
-
+courseDocument.map(x=>{
+  registry.registerPath(x)
+})
 
 postRequestDoc(
     selectSchemaUser,

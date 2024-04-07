@@ -49,6 +49,7 @@ export const userRelation = relations(user, ({ many }) => ({
   course: many(course),
 }));
 
+
 export const courseRelation = relations(course, ({ one, many }) => ({
   createdBy: one(user, { fields: [course.createdBy], references: [user.id] }),
   enrollments: many(enrollments),

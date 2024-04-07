@@ -1,10 +1,14 @@
 import { Request, Response } from "express-serve-static-core";
 import { user } from "../db/schema";
 import { db } from "../db";
-import { insertSchemaUser, updateUserSchema, userGetQuery } from "../validator";
 import { ZodErrorHandelr } from "../util";
 import { z } from "zod";
-import { eq, or } from "drizzle-orm";
+import { eq } from "drizzle-orm";
+import {
+  insertSchemaUser,
+  updateUserSchema,
+  userGetQuery,
+} from "../validator/user";
 
 export async function updateUser(
   req: Request<
@@ -18,7 +22,7 @@ export async function updateUser(
   try {
     userGetQuery.parse(req.query);
     updateUserSchema.parse(req.body);
-    let result=[];
+    let result = [];
     try {
       result = await db
         .update(user)
@@ -88,11 +92,11 @@ export async function getUser(
     let result;
     try {
       result = await db.query.user.findFirst({
-        where: or(eq(user.id, req.query.user)),
+        where: eq(user.id, req.query.user),
       });
     } catch (error) {
       result = await db.query.user.findFirst({
-        where: or(eq(user.email, req.query.user)),
+        where: eq(user.email, req.query.user),
       });
     }
     if (result) {
@@ -117,3 +121,4 @@ export async function insertUser(
     ZodErrorHandelr(res, error);
   }
 }
+

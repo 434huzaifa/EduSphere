@@ -1,5 +1,5 @@
 import { ZodObject } from "zod";
-import { msgSchema } from "../validator";
+import { msgSchema } from "../validator/enroll";
 import { registry } from ".";
 
 export function postRequestDoc(
