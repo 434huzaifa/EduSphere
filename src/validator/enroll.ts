@@ -23,7 +23,7 @@ export const insertSchemaEnroll = createInsertSchema(enrollments, {
         }
       },
       { message: "Invalid Course id." }
-    ),
+    ).transform(val=>parseInt(val)),
   user_id: z
     .string()
     .uuid()
@@ -40,7 +40,7 @@ export const insertSchemaEnroll = createInsertSchema(enrollments, {
       },
       { message: "Created By is not a valid user" }
     ),
-    enrollment_date:z.string().datetime({offset:true})
+    enrollment_date:z.date().optional()
 }).omit({
   id: true,
   createdAt: true,

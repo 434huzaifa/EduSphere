@@ -24,7 +24,7 @@ app.use(
 );
 app.use("/user", userRouter);
 app.use("/course", courseRouter);
-app.use("/enroll", courseRouter);
+app.use("/enroll", enrollRouter);
 const options:SwaggerUiOptions={
   customSiteTitle:"EduSphere",
 }

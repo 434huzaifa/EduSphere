@@ -6,7 +6,7 @@ import {
   insertSchemaCourse,
   updateCourseSchema,
 } from "../validator/course";
-import { course, enrollments, user } from "../db/schema";
+import { course, user } from "../db/schema";
 import { z } from "zod";
 import { and, eq } from "drizzle-orm";
 import { userGetQuery } from "../validator/user";

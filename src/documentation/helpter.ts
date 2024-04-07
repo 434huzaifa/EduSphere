@@ -24,7 +24,7 @@ export function postRequestDoc(
       },
     },
     responses: {
-      200: {
+      201: {
         description: "",
         content: {
           "application/json": {
