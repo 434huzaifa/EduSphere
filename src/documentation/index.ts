@@ -55,6 +55,17 @@ const config: OpenAPIObjectConfig = {
     version: "1.0.0",
     description: "A simple API EduSphere.",
   },
+  servers:[
+    {
+      url:"https://edu-sphere-ashen.vercel.app",
+      description:"Deployed Url of backend"
+    },
+    {
+      url:'http://localhost:3000',
+      description:"If you run you server at localhost:3000"
+    },
+    
+  ],
   tags: [
     {
       name: "JWT",
