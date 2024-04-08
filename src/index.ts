@@ -30,7 +30,7 @@ app.use(
 app.use(cookieParser());
 app.use(cors({
   origin:[
-    'https://edu-sphere-ashen.vercel.app',
+    'https://edu-sphere-yqk2.vercel.app',
     'http://localhost:3000',
   ],
   credentials:true
