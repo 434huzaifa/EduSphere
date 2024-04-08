@@ -5,12 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
+    "build": "tsc --build",
     "start": "node dist/src/index.js",
     "db:generate": "drizzle-kit generate:pg",
     "db:drop": "drizzle-kit drop",
-    "db:migrate": "ts-node ./src/db/migrate.ts",
-    "vercel-build":"tsc"
+    "db:migrate": "ts-node ./src/db/migrate.ts"
   },
 
   "keywords": [],
