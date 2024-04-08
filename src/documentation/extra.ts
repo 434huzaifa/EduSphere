@@ -7,7 +7,7 @@ export const extraDocumentation: RouteConfig[] = [
         method: "post",
         path: "/sendmail/",
         tags: ["Extra"],
-        summary: "Send mail to anyone.",
+        summary: "Send mail to Me. Its free version so only my email is valid (434.darkmaster@gmail.com)",
         request: {
             body: {
                 content: {

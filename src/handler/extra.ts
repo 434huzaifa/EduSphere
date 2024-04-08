@@ -21,8 +21,9 @@ export async function sendEmail(
     });
     if (!result.data) {
         res.status(400).send({msg:`${result.error?.message}`})
+    }else{
+        res.status(200).send({msg:"Mail Send successful",result:result})
     }
-    res.send(result)
   } catch (error) {
     ZodErrorHandelr(res, error);
   }
