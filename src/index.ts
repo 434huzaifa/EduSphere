@@ -36,7 +36,10 @@ const options: SwaggerUiOptions = {
   customSiteTitle: "EduSphere",
   customfavIcon: "/favicon.png",
 };
-app.use("/", swaggerUi.serve, swaggerUi.setup(generator, options));
+app.get("/",(req,res)=>{
+  res.send("I AM RUNNING")
+})
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(generator, options));
 
 app.listen(port, () => {
   console.log(`I AM RUNNING ON http://localhost:${port}`);
