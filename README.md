@@ -4,7 +4,7 @@
 
 - CRUD for every application
 - mail send using resend
-- API documentaion using Swagger UI
+- API documentation using Swagger UI
 - more
 
 ## Tech Stack
@@ -15,6 +15,7 @@
 - Zod
 - Drizzle-ORM
 - PG
+- jsonwebtoken
 
 Live backend: [https://edu-sphere-ten.vercel.app](https://edu-sphere-ten.vercel.app)
 
