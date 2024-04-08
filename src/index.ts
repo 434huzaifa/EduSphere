@@ -28,7 +28,13 @@ app.use(
   })
 );
 app.use(cookieParser());
-app.use(cors());
+app.use(cors({
+  origin:[
+    'https://edu-sphere-ashen.vercel.app',
+    'http://localhost:3000',
+  ],
+  credentials:true
+}));
 app.use("/user", userRouter);
 app.use("/course", courseRouter);
 app.use("/enroll", enrollRouter);
