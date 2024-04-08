@@ -6,6 +6,7 @@ import errorHandler, { Errors, Guards } from "errors-express";
 import { generator } from "./documentation";
 import courseRouter from "./router/course";
 import enrollRouter from "./router/enroll";
+import extraRouter from "./router/extra"
 import jwtRouter from "./router/jwt";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -28,9 +29,6 @@ const ParseJson = (req: Request, res: Response, next: NextFunction) => {
 
   express.json()(req, res, errorHandler)
 }
-
-
-
 app.use(express.urlencoded({ extended: false }));
 app.use(ParseJson);
 app.use(express.static("public"));
@@ -46,12 +44,11 @@ app.use(
   })
 );
 app.use(cookieParser());
-
 app.use("/user", userRouter);
 app.use("/course", courseRouter);
 app.use("/enroll", enrollRouter);
 app.use("/", jwtRouter);
-
+app.use("/", extraRouter);
 app.get("/", (req, res) => {
   res.send("I AM RUNNING");
 });

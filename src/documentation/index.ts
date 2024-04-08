@@ -12,6 +12,7 @@ import { courseDocument } from "./course";
 import { enrollDocumentation } from "./enroll";
 import { jwtDocumentation } from "./jwt";
 import { OpenAPIObjectConfig } from "@asteasolutions/zod-to-openapi/dist/v3.0/openapi-generator";
+import { extraDocumentation } from "./extra";
 export const registry = new OpenAPIRegistry();
 userDocument.map((x) => {
   registry.registerPath(x);
@@ -25,6 +26,9 @@ enrollDocumentation.map((x) => {
 jwtDocumentation.map((x) => {
   registry.registerPath(x);
 });
+extraDocumentation.map(x=>{
+  registry.registerPath(x)
+})
 postRequestDoc(
   selectSchemaUser,
   insertSchemaUser,
@@ -47,7 +51,6 @@ postRequestDoc(
   "Create a new Enrollment",
   "Enrollment"
 );
-
 const config: OpenAPIObjectConfig = {
   openapi: "3.0.0",
   info: {
